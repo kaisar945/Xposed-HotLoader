@@ -1,17 +1,17 @@
 # XposedHotLoader
-## What is this?
+## 这是什么?
 
-```Xposed``` module hot loader, new code can be applied without restarting the phone every time during development
+```Xposed```模块热加载器,在开发中无需每次重启手机即可应用新的代码
 
-## How to use?
+## 如何使用?
 
-1. Clone ```HotLoader``` library project to the project directory ```git clone https://github.com/jrsen/Xposed-HotLoader.git libhotloader ```
+1. 克隆```HotLoader```库到工程目录```git clone https://github.com/jrsen/Xposed-HotLoader.git libhotloader```
 
-2. Edit the project ```settings.gradle``` and add ```include':libhotloader'``` to add the ```hotloader``` library to the project
+2. 编辑工程```settings.gradle```添加```include ':libhotloader'```将```hotloader```项目添加到项目工程
 
-3. Edit the main project ```build.grade``` and add dependency ```implementation project(path:':libhotloader')```
+3. 编辑主项目```build.grade```添加依赖```implementation project(path: ':libhotloader')```
 
-4. Edit the main project ```assets/xposed_init``` file to replace the original content with ```com.kaisar.xposed.hotloader.HotLoader```, and place your Xposed initialization class in ```AndroidManifest.xml``` application tag like this e.g:
+4. 编辑主项目```assets/xposed_init```文件使用```com.kaisar.xposed.hotloader.HotLoader```替换原来的内容，并且将您的Xposed初始化类在```AndroidManifest.xml```的Application标签中声明
 
    ```xml
    <?xml version="1.0" encoding="utf-8"?>
@@ -27,13 +27,13 @@
    </manifest>
    ```
 
-5. Restart the phone to activate the hot reload function
+5. 重启手机激活热加载功能
 
-## Q&A
+## 常见问题
 
-- The new code does not take effect after updating the module?
+- 更新模块后新的代码没有生效?
 
-   All changes will be applied after the target process restarts, you can manually kill the target process to apply the new module
+   所有改动都将在目标进程重启后应用,你可以手动杀死目标进程以应用新的模块
 
-[中文](README_zh.md)
 
+[English](README_en.md)
