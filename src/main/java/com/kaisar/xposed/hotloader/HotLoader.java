@@ -43,7 +43,6 @@ public final class HotLoader implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) {
-        if (!lpparam.packageName.equals("com.android.chrome")) return;
         try {
             boolean isSystem = "android".equals(lpparam.packageName);
             IXposedHookLoadPackage xposedModuleEntry = getModuleEntry(isSystem);
@@ -87,7 +86,9 @@ public final class HotLoader implements IXposedHookLoadPackage {
                     if ("package".equals(parser.getName()) && modulePackageName.equals(parser.getAttributeValue(null, "name"))) {
                         String codePath = new File(parser.getAttributeValue(null, "codePath"), "base.apk").getPath();
                         PackageInfo packageInfo = getPackageManagerCompat().getPackageArchiveInfo(codePath, PackageManager.GET_META_DATA);
-                        packageInfo.applicationInfo.sourceDir = packageInfo.applicationInfo.publicSourceDir = codePath;
+                        if (packageInfo != null) {
+                            packageInfo.applicationInfo.sourceDir = packageInfo.applicationInfo.publicSourceDir = codePath;
+                        }
                         return packageInfo;
                     }
                 }
